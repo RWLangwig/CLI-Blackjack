@@ -1,6 +1,6 @@
 package cliblackjack;
 
-//This code will create a CLI Blackjack simulator 
+//This code will create a CLI Blackjack simulator by CJ and RWL
 
 import java.util.*;
 
