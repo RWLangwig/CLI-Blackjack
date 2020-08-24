@@ -1,0 +1,34 @@
+.classpath
+.project
+bin/
+ .bash_history
+        .config/
+        .eclipse/
+        .gitconfig
+        .p2/
+        .tooling/
+        .viminfo
+        AppData/
+        Contacts/
+        Desktop/
+        Documents/
+        Downloads/
+        Favorites/
+        Links/
+        Music/
+        NTUSER.DAT
+        NTUSER.DAT{bbed3e3b-0b41-11e3-8249-d6927d06400b}.TM.blf
+        NTUSER.DAT{bbed3e3b-0b41-11e3-8249-d6927d06400b}.TMContainer00000000000000000001.regtrans-ms
+        NTUSER.DAT{bbed3e3b-0b41-11e3-8249-d6927d06400b}.TMContainer00000000000000000002.regtrans-ms
+        OneDrive/
+        Pictures/
+        Saved Games/
+        Searches/
+        Videos/
+        cdCD
+        eclipse-workspace/
+        eclipse/
+        ntuser.dat.LOG1
+        ntuser.dat.LOG2
+        ntuser.ini
+
