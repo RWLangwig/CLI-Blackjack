@@ -23,7 +23,8 @@ public class Cards {
 		for (int i = 0; i < deck.length; i++) 
 			deck[i] = i;
 		
-	//	System.out.println("Deck: "+Arrays.toString(deck)); //print deck array
+		
+		System.out.println("Deck: "+Arrays.toString(deck)); //print deck array
 		
 		//Bullet 2: Random Cards for player and dealer
 		for(int i=0;i<deck.length;i++) //shuffle the cards.
@@ -34,7 +35,7 @@ public class Cards {
 			deck[index]=temp;
 		}
 		
-//		System.out.println("shuffled deck: "+Arrays.toString(deck));
+		System.out.println("shuffled deck: "+Arrays.toString(deck));
 		
 		iDealerCard1=deck[0]; //Dealers 2 cards from shuffled deck.
 		iDealerCard2=deck[1];
@@ -42,19 +43,17 @@ public class Cards {
 		iPlayerCard1=deck[2]; //player 2 cards from shuffled deck.
 		iPlayerCard2=deck[3];
 
-		System.out.println("Dealer hand: " + " "+ displayCardName(iDealerCard1));
-		System.out.println("Your hand: " + " "+ displayCardName(iPlayerCard1) + ", " + displayCardName(iPlayerCard2));
+		//System.out.println("The card is "+displayCardName(iDealerCard1));
 		
-		// code to display card for bullet 3 and 4
+		//  draft code to display card for bullet 3 and 4
 		//loop will run from 0-3 for first 4 cards from shuffled deck.
 		
-	for (int i = 0; i<4; i++) 
-		{
-		String suit = suits[deck[i] / 13];
-			String rank = ranks[deck[i] % 13];	
-			
-//	System.out.println("Card number " + deck[i] + ": " + rank + " of " + suit);
-		}
+//		for (int i = 0; i<4; i++) 
+//		{
+//			String suit = suits[deck[i] / 13];
+//			String rank = ranks[deck[i] % 13];	
+//		System.out.println("Card number " + deck[i] + ": " + rank + " of " + suit);
+//		}
 		
 	}
 
