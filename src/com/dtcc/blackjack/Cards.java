@@ -87,7 +87,7 @@ public class Cards {
 						if(arrayPlayer[i]!=-1)
 							System.out.print((displayCardName(arrayPlayer[i])+", "));
 					
-					strResult= compareDealerPlayerValues(arrayPlayer,arrayDealer);
+					strResult= compareDealerPlayerValues(arrayPlayer,arrayDealer);	//comparing the total of player cards and dealer cards.
 					if(strResult.equals(arrayResult[0])) 	//player win, dealer bust
 					{
 						System.out.println();
