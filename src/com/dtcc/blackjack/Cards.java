@@ -8,7 +8,6 @@ public class Cards {
 	
 	public static void main(String[] args) {
 		
-		
 		int[] deck = new int [52];
 		int iPlayerCard1=-1; int iPlayerCard2=-1;
 		int iDealerCard1=-1; int iDealerCard2=-1;
