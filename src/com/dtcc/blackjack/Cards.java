@@ -21,16 +21,17 @@ public class Cards {
 			int idealerIndex=2;	//starting index for arrayDealer after dealing first 2 cards
 			int nextIndex=4;	//starting index of deck after first four cards.
 			
-		
 			String[] arrayMoves = { "HIT", "STAND"};	//array for move HIT,STAND
 			String[] arrayResult= {"WIN","BUST","NEXTMOVE","TIE"};	//array for Result
 			String strPlayerMove=null;
+		//	String strDealerMove=null;
 			String strResult=null;
 			String strDealerCard=null;
 			String strPlayerCard=null;
 					
 			boolean hitFlag=false;
 			boolean standFlag=false;
+			boolean dealerLoop=false;
 			
 			Scanner input=new Scanner(System.in);
 			
@@ -47,7 +48,7 @@ public class Cards {
 			}
 				
 			iDealerCard1=deck[0]; iDealerCard2=deck[1];//Dealers 2 cards from shuffled deck.
-			iPlayerCard1=deck[2];iPlayerCard2=deck[3]; //player 2 cards from shuffled deck.
+			iPlayerCard1=deck[2];iPlayerCard2=deck[3]; //Player 2 cards from shuffled deck.
 			
 			arrayDealer[0]=iDealerCard1;		//FIRST TWO VALUES IN arrayDealer (dealer's 2 cards)
 			arrayDealer[1]=iDealerCard2;
@@ -58,18 +59,20 @@ public class Cards {
 			System.out.println("****** BlackJack ******");
 			System.out.print("Dealer hand: " + " "+ displayCardName(iDealerCard1)+"  ");
 			System.out.println("Your hand: " + " "+ displayCardName(iPlayerCard1) + ", " + displayCardName(iPlayerCard2));
+////	//		System.out.print("Dealer hand: " + " "+ displayCardName(arrayDealer)+"  ");
 			
 		//Bullet 5. HIT and STAND Part.
-		
+			System.out.println("Please enter HIT or STAND ");
 			System.out.println("Your Move: ");
 			strPlayerMove=input.nextLine().toUpperCase().trim();
 			boolean bProperInput=checkProperInput(strPlayerMove);
 			
 			while(bProperInput!=true) //check proper input
 			{
-				System.out.println("Please enter proper input: HIT or STAND");System.out.println("Your Move: "); 
-				strPlayerMove=input.nextLine().toUpperCase().trim();
-				bProperInput=checkProperInput(strPlayerMove);
+				
+		//		System.out.println("Your Move: "); 
+		//		strPlayerMove=input.nextLine().toUpperCase().trim();
+		//		bProperInput=checkProperInput(strPlayerMove);
 			}
 			
 			//**************CODE FOR HIT ********************
@@ -115,7 +118,8 @@ public class Cards {
 							bProperInput=checkProperInput(strPlayerMove);
 						}
 						if(strPlayerMove.equals(arrayMoves[0])) {hitFlag=true;}else{hitFlag=false;}
-					}
+					
+				}				
 					else if(strResult.equals(arrayResult[3]))
 					{
 						hitFlag=false;
@@ -125,18 +129,64 @@ public class Cards {
 					else {System.out.println("Something went wrong >>> Please run the game again.");}
 				}
 			}
-				
+					
+			//***************CODE FOR STAND******************
+			//Put dealers cards value in arrayDealer and use standFlag
 			
-			//***************CODE FOR STAND******************Put dealers cards value in arrayDealer and use standFlag
 			if(strPlayerMove.equals(arrayMoves[1]))
 			{
+				dealerLoop=true;
+		//		System.out.println("Player stands. ");
 				
-			}
+				iDealerCard=deck[nextIndex++];
+				arrayDealer[idealerIndex++]=iDealerCard;		
+				//add dealers card to the dealer array.
+				
+				
+				System.out.print("Dealer Hand: ");
+				for(int i=0;i<arrayDealer.length;i++)
+					if(arrayDealer[i]!=-1)
+						System.out.print((displayCardName(arrayDealer[i])+", "));
+				
+				System.out.print("Player's hand ");
+				for(int i=0;i<arrayPlayer.length;i++)
+					if(arrayPlayer[i]!=-1)
+						System.out.print((displayCardName(arrayPlayer[i])+", "));
+					
+					strDealerCard=displayCardName(iDealerCard2);		//display dealer card name
+					
+					strResult= compareDealerPlayerValues(arrayPlayer,arrayDealer);	//comparing the total of player cards and dealer cards.
+					if(strResult.equals(arrayResult[0])) 	//player win, dealer bust
+					{
+						System.out.println();
+						dealerLoop=false;
+						System.out.println("Dealer Bust! You win! Play again (y/n): ");
+						yesOrNo=playAgain();
+					}	
+					else if (strResult.equals(arrayResult[1])){
+						System.out.println();
+						dealerLoop=false;
+						System.out.println("Dealer Win! Player lose! Play again (y/n): ");
+						yesOrNo=playAgain();
+							
+					}
+					else if (strResult.equals(arrayResult[2])){
+						iDealerCard=deck[nextIndex++];
+						arrayDealer[idealerIndex++]=iDealerCard;		//add dealers card to the player array.					
+						strResult= compareDealerPlayerValues(arrayPlayer,arrayDealer);
+						
+					}
+								
+				}
+	//				else {System.out.println("Something went wrong >>> Please run the game again.");}
+				}
+			
 		
-		}while(yesOrNo==true); //for y or n
-
+		while(yesOrNo==true); //for y or n
 	}
-
+		//end while loop
+	
+	
 	public static String displayCardName(int cardNumber)  //to get Card name display
 	{
 		String card=null;
