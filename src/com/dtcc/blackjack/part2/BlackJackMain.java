@@ -18,7 +18,6 @@ public class BlackJackMain {
 			int deckIndex=4;
 			
 			String strMove=null;
-			String strPlayAgain=null;
 			Result strResult;
 			
 			//boolean isWinner=false;
@@ -47,8 +46,7 @@ public class BlackJackMain {
 			{
 				System.out.println("HOORAY..YOU HAVE WON THE BLACKJACK");
 				System.out.println("You want to play again (y/n): ");
-				strPlayAgain=input.next().trim().toUpperCase();
-				yesOrNO=playAgain();
+				yesOrNO=BlackJack.playAgain();
 				
 			}
 			else 
@@ -59,33 +57,39 @@ public class BlackJackMain {
 				if(strMove.equalsIgnoreCase(Move.HIT.toString()))
 				{
 					hitFlag=true;
-					while(hitFlag)
+					while(hitFlag==true)
 					{
 						playerCards[playerIndex++]=allCards[deckIndex++];
+						
 						System.out.print(("Dealer hand: " +card.getRankString(allCards[0].rank)+" of "+allCards[0].suit));
 						System.out.print("\tYour Hand: ");
 						blackjack.displayCards(playerCards);	
+						
 						strResult=blackjack.comparePlayerCardsValues(playerCards);
+						
 						if(strResult.equals(Result.WIN)) 	//player win
 						{
 							hitFlag=false;
 							System.out.println();
 							System.out.println("Dealer Busts! You win! Play again (y/n): ");
-							yesOrNO=playAgain();
+							yesOrNO=BlackJack.playAgain();
 						}
 						else if(strResult.equals(Result.BUST))
 						{
 							hitFlag=false;
 							System.out.println();
 							System.out.println("BUST! Dealer Wins! Play again (y/n): ");
-							yesOrNO=playAgain();
+							yesOrNO=BlackJack.playAgain();
 						}
 						else if(strResult.equals(Result.NEXTMOVE))
 						{
 							System.out.println();
 							System.out.println("Your MOVE:");
 							strMove=input.next().trim().toUpperCase();
-							if(strMove.equals(Move.HIT.toString())) {hitFlag=true;}else{hitFlag=false;}
+							if(strMove.equals(Move.HIT.toString())) {hitFlag=true;}
+							else if(strMove.equals(Move.STAND.toString())){hitFlag=false;}
+							else if(strMove.equals(Move.DOUBLE.toString())) {hitFlag=false;}
+							else if (strMove.equals(Move.SPLIT.toString())) {hitFlag=false;}
 						}
 					}
 				}
@@ -93,7 +97,7 @@ public class BlackJackMain {
 				if(strMove.equalsIgnoreCase(Move.STAND.toString())) 
 				{
 					dealerLoop=true;
-					
+					dealerCards[dealerIndex++]=allCards[deckIndex++];
 					System.out.print("Dealer Hand: ");
 					blackjack.displayCards(dealerCards);	
 				
@@ -103,19 +107,20 @@ public class BlackJackMain {
 					while(dealerLoop==true)
 					{
 						strResult=blackjack.compareDealerCardsValues(dealerCards, playerCards);
+						
 						if(strResult.equals(Result.WIN)) 	//player win
 						{
 							dealerLoop=false;
 							System.out.println();
 							System.out.println("BUST! Dealer Wins! Play again (y/n): ");
-							yesOrNO=playAgain();
+							yesOrNO=BlackJack.playAgain();
 						}
 						else if(strResult.equals(Result.BUST)) 	//player win
 						{
 							dealerLoop=false;
 							System.out.println();
 							System.out.println("Dealer Busts! You win! Play again (y/n): ");
-							yesOrNO=playAgain();
+							yesOrNO=BlackJack.playAgain();
 						}
 						else if(strResult.equals(Result.NEXTMOVE))
 						{
@@ -132,7 +137,12 @@ public class BlackJackMain {
 						{
 							dealerLoop=false;
 							System.out.println("Player and Dealer got same points!!! Play again(y/n): ");
-							yesOrNO=playAgain();
+							yesOrNO=BlackJack.playAgain();
+						}
+						else
+						{
+							System.out.println("Technical issue. >>> Play again(y/n): ");
+							yesOrNO=BlackJack.playAgain();
 						}
 					}
 				}
@@ -149,29 +159,10 @@ public class BlackJackMain {
 					System.out.println("in split");
 				}
 			}
-		
+			
+			
 		}while(yesOrNO==true);
 	}
 	
-	public static boolean playAgain() 	//play again y or n.
-	{	
-		Scanner input1=new Scanner(System.in);
-		boolean yesOrNo=false;
-		boolean properInput=true;
-		String strPlayAgain;
-		strPlayAgain=input1.next().toLowerCase().trim();
-		while(properInput)
-		{
-			if(strPlayAgain.equalsIgnoreCase("y") || strPlayAgain.equalsIgnoreCase("yes") ) {properInput=false;yesOrNo=true;}
-			else if(strPlayAgain.equalsIgnoreCase("n") || strPlayAgain.equalsIgnoreCase("no")) {properInput=false; yesOrNo=false;}
-			//else { System.out.println("Invalid input. Please run the program again.");yesOrNo=false;}	
-			else 
-			{
-				System.out.println("Please enter 'y' or 'n'. Play again? (y/n)");
-				strPlayAgain=input1.next().toLowerCase().trim();
-				properInput=true;
-			}	
-		}
-		return yesOrNo;
-	}
+
 }

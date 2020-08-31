@@ -28,7 +28,10 @@ public class BlackJack {
 					if(total>10) { total+=1;}
 					else{total+=getRankIntValue(c.rank.toString());}	 
 				}
-				else{total+=getRankIntValue(c.rank.toString());}
+				else
+				{
+					total+=getRankIntValue(c.rank.toString());
+				}	
 			}
 		}
 		return total;
@@ -40,7 +43,7 @@ public class BlackJack {
 		{
 		 case "TWO":   	return 2; 
          case "THREE":  	return 3; 
-         case "FOUE":   	return 4; 
+         case "FOUR":   	return 4; 
          case "FIVE":   	return 5;
          case "SIX":   	return 6;
          case "SEVEN":   	return 7;
@@ -79,7 +82,6 @@ public class BlackJack {
 		int cardsTotal=0;
 		
 		cardsTotal=bj.getTotalCardsValue(cardArray);
-		
 		if(cardsTotal==21)
 		{
 			strResult=Result.WIN;
@@ -104,7 +106,7 @@ public class BlackJack {
 		
 		cardsDealerTotal=bj.getTotalCardsValue(cardDealerArray);
 		cardsPlayerTotal=bj.getTotalCardsValue(cardPlayerArray);
-		
+
 		if(cardsDealerTotal==21 )
 		{
 			strResult=Result.WIN;
@@ -128,6 +130,28 @@ public class BlackJack {
 		}
 			
 		return strResult;
+	}
+	
+	public static boolean playAgain() 	//play again y or n.
+	{	
+		Scanner input1=new Scanner(System.in);
+		boolean yesOrNo=false;
+		boolean properInput=true;
+		String strPlayAgain;
+		strPlayAgain=input1.next().toLowerCase().trim();
+		while(properInput)
+		{
+			if(strPlayAgain.equalsIgnoreCase("y") || strPlayAgain.equalsIgnoreCase("yes") ) {properInput=false;yesOrNo=true;}
+			else if(strPlayAgain.equalsIgnoreCase("n") || strPlayAgain.equalsIgnoreCase("no")) {properInput=false; yesOrNo=false;}
+			//else { System.out.println("Invalid input. Please run the program again.");yesOrNo=false;}	
+			else 
+			{
+				System.out.println("Please enter 'y' or 'n'. Play again? (y/n)");
+				strPlayAgain=input1.next().toLowerCase().trim();
+				properInput=true;
+			}	
+		}
+		return yesOrNo;
 	}
 
 }
