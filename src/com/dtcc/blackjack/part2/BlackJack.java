@@ -131,28 +131,39 @@ public class BlackJack {
 			
 		return strResult;
 	}
-	
-	public static boolean playAgain() 	//play again y or n.
-	{	
-		Scanner input1=new Scanner(System.in);
-		boolean yesOrNo=false;
-		boolean properInput=true;
-		String strPlayAgain;
-		strPlayAgain=input1.next().toLowerCase().trim();
-		while(properInput)
-		{
-			if(strPlayAgain.equalsIgnoreCase("y") || strPlayAgain.equalsIgnoreCase("yes") ) {properInput=false;yesOrNo=true;}
-			else if(strPlayAgain.equalsIgnoreCase("n") || strPlayAgain.equalsIgnoreCase("no")) {properInput=false; yesOrNo=false;}
-			//else { System.out.println("Invalid input. Please run the program again.");yesOrNo=false;}	
-			else 
-			{
-				System.out.println("Please enter 'y' or 'n'. Play again? (y/n)");
-				strPlayAgain=input1.next().toLowerCase().trim();
-				properInput=true;
-			}	
-		}
-		return yesOrNo;
-	}
 
+	public boolean invalidMoveException (String strMoveException) {
+		Scanner input = new Scanner(System.in);
+	boolean isValid = false;
+		
+// This will check for 	valid input, if false it will print an exception <===============
+		String strMove=null;
+		strMoveException = strMoveException.toUpperCase();
+		switch (strMoveException){
+		
+		case "DOUBLE":
+			isValid = true;
+			return isValid;	
+		case "HIT":
+			isValid = true;
+			return isValid;	
+		case "SPLIT":
+			isValid = true;
+			return isValid;	
+		case "STAND":
+			isValid = true;
+			return isValid;	
+			default: System.out.println("Please enter a valid move.");
+			isValid=false;
+			
+			return isValid;
+			//return isValid;	
+			
+				}
+
+	}
 }
+
+
+
 
