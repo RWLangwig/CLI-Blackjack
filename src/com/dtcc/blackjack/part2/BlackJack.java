@@ -129,6 +129,40 @@ public class BlackJack {
 			
 		return strResult;
 	}
+	
 
+	public boolean invalidMoveException (String strMoveException) {
+		Scanner input = new Scanner(System.in);
+	boolean isValid = false;
+		
+// This will check for 	valid input, if false it will print an exception <===============
+		String strMove=null;
+		strMoveException = strMoveException.toUpperCase();
+		switch (strMoveException){
+		
+		case "DOUBLE":
+			isValid = true;
+			return isValid;	
+		case "HIT":
+			isValid = true;
+			return isValid;	
+		case "SPLIT":
+			isValid = true;
+			return isValid;	
+		case "STAND":
+			isValid = true;
+			return isValid;	
+			default: System.out.println("Please enter a valid move.");
+			isValid=false;
+			
+			return isValid;
+			//return isValid;	
+			
+				}
+
+	}
 }
+
+
+
 
