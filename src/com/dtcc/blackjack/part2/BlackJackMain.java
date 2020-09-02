@@ -18,7 +18,6 @@ public class BlackJackMain {
 			int deckIndex=4;
 			
 			String strMove=null;
-			String strPlayAgain=null;
 			Result strResult;
 			
 			
@@ -49,7 +48,7 @@ public class BlackJackMain {
 			{
 				System.out.println("HOORAY..YOU HAVE WON THE BLACKJACK");
 				System.out.println("You want to play again (y/n): ");
-				
+        
 				strPlayAgain=input.next().trim().toUpperCase();
 				yesOrNO=playAgain();
 				
@@ -73,13 +72,16 @@ public class BlackJackMain {
 				
 				{
 					hitFlag=true;
-					while(hitFlag)
+					while(hitFlag==true)
 					{
 						playerCards[playerIndex++]=allCards[deckIndex++];
+						
 						System.out.print(("Dealer hand: " +card.getRankString(allCards[0].rank)+" of "+allCards[0].suit));
 						System.out.print("\tYour Hand: ");
 						blackjack.displayCards(playerCards);	
+						
 						strResult=blackjack.comparePlayerCardsValues(playerCards);
+						
 						if(strResult.equals(Result.WIN)) 	//player win
 						{
 							hitFlag=false;
@@ -93,7 +95,6 @@ public class BlackJackMain {
 							hitFlag=false;
 							System.out.println();
 							System.out.println("BUST! Dealer Wins! Play again (y/n): ");
-							
 							yesOrNO=playAgain();
 						}
 						else if(strResult.equals(Result.NEXTMOVE))
@@ -113,14 +114,14 @@ public class BlackJackMain {
 								else if (strMove.equals(Move.SPLIT.toString())) {hitFlag=false;}
 											
 							}																			
-					   }
-				}
-	
+					   }						
+					}
+
 				//STAND CODE
 				if(strMove.equalsIgnoreCase(Move.STAND.toString())) 
 				{
 					dealerLoop=true;
-					
+					dealerCards[dealerIndex++]=allCards[deckIndex++];
 					System.out.print("Dealer Hand: ");
 					blackjack.displayCards(dealerCards);	
 				
@@ -130,6 +131,7 @@ public class BlackJackMain {
 					while(dealerLoop==true)
 					{
 						strResult=blackjack.compareDealerCardsValues(dealerCards, playerCards);
+						
 						if(strResult.equals(Result.WIN)) 	//player win
 						{
 							dealerLoop=false;
@@ -166,12 +168,11 @@ public class BlackJackMain {
 						}
 						else
 						{
-							System.out.println("Technical issue. >>> Pay again(y/n): ");
+							System.out.println("Technical issue. >>> Play again(y/n): ");
 							yesOrNO=playAgain();
 						}
 					}
 				}
-				
 			
 				//DOUBLE CODE //Robert.
 			if(strMove.equalsIgnoreCase(Move.DOUBLE.toString()))
@@ -185,13 +186,10 @@ public class BlackJackMain {
 				System.out.println("in split");
 				}
 			}
-		
-		
+
 		}while(yesOrNO==true);
 }
 
-	
-	
 	public static boolean playAgain() 	//play again y or n.
 	{	
 		Scanner input1=new Scanner(System.in);
