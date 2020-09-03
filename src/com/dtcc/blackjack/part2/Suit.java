@@ -1,8 +1,8 @@
 package com.dtcc.blackjack.part2;
 
 public enum Suit {
-	CLUBS,
-	DIAMONDS,
-	HEARTS,
-	SPADES
+	C,	//CLUBS
+	D,	//DIAMONDS
+	H,	//HEARTS
+	S	//SPADES
 }
