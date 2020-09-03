@@ -23,12 +23,14 @@ public class BlackJackMain
 			int secondHandIndex=1;
 			int standCount=0;
 			
+						
 			String strMove=null;
 			Result strResult;
 			Result getResult;
 			Result hitForFirstHand;
 			Result hitForSecondHand;
 			
+			boolean doubleFlag = false;
 			boolean strResult2 = false;
 			boolean hitFlag=false;
 			boolean dealerLoop=false;
@@ -36,11 +38,12 @@ public class BlackJackMain
 			boolean hitsecondhand=false;
 			boolean isSameRank=false;
 			boolean properSplitInput=false;
+			boolean properDoubleInput=false; 
 		
 			Card card=new Card();
 			Deck deck=new Deck();
 			BlackJack blackjack=new BlackJack();
-			SplitMoves newMove=new SplitMoves();
+			SplitMoves newMove=new SplitMoves(); 
 			Scanner input=new Scanner(System.in);
 			allCards=deck.getAllCards();
 			
@@ -132,12 +135,36 @@ public class BlackJackMain
 						}
 					}
 				}
-					//DOUBLE CODE //Robert code.
-				if(strMove.equalsIgnoreCase(Move.DOUBLE.toString()))
-				{
-						//System.out.println(" in double");
-				}
+					// Double code
 				
+					if(strMove.equalsIgnoreCase(Move.DOUBLE.toString()))
+						
+					{doubleFlag = true;
+					playerCards[playerIndex++]=allCards[deckIndex++];
+					blackjack.displayOneHandCards(dealerCards,playerCards);
+					
+					while (doubleFlag == true ) {
+					strResult=blackjack.comparePlayerCardsValues(playerCards);
+				
+					if(strResult.equals(Result.NEXTMOVE))
+						
+					{dealerCards[dealerIndex++]=allCards[deckIndex++]; 
+					strResult=blackjack.compareDealerCardsValues(dealerCards, playerCards);
+			
+					doubleFlag = true;
+					blackjack.displayDealerResult(strResult);}
+				
+					else if(strResult.equals(Result.WIN) || strResult.equals(Result.BUST) || strResult.equals(Result.TIE)) 
+					
+					{doubleFlag = false;
+					 
+					blackjack.displayPlayerResult(strResult); 
+				    yesOrNO=BlackJack.playAgain();}
+				
+								}		
+				}			
+				
+								
 					//SPLIT CODE
 				if(strMove.equalsIgnoreCase(Move.SPLIT.toString()) && isSameRank==true)
 				{
@@ -279,8 +306,9 @@ public class BlackJackMain
 					}
 				}
 			}
-	}while(yesOrNO==true);
+		
+}while(yesOrNO==true);
+	}
 	}
 
-}
 
