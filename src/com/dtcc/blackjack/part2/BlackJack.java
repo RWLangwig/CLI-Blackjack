@@ -128,6 +128,7 @@ public class BlackJack {
 		{
 			if(cardsPlayerTotal<cardsDealerTotal && cardsPlayerTotal<=21) {strResult=Result.WIN;} 
 			else if(cardsPlayerTotal>cardsDealerTotal && cardsPlayerTotal<=21) {strResult=Result.BUST;}
+			else if(cardsDealerTotal==cardsPlayerTotal) {strResult=Result.TIE;}
 		}
 		else if(cardsDealerTotal==cardsPlayerTotal)
 		{
@@ -196,7 +197,7 @@ public class BlackJack {
 		BlackJack bj=new BlackJack();
 		System.out.print("Dealer hand: ");
 		bj.displayCards(cardDealerArray);
-		System.out.print("\tYour First Hand: " );
+		System.out.print("\tYour Hand: " );
 		bj.displayCards(cardHand1Array);
 	}
 	
@@ -236,7 +237,7 @@ public class BlackJack {
 		if(result.equals(Result.TIE))
 		{
 			System.out.println();
-			System.out.println("PUSH! Player and Dealer got same points in ");
+			System.out.println("PUSH! Player and Dealer got same points. Play again (y/n): ");
 
 		}
 		

@@ -36,7 +36,7 @@ public class SplitMoves {
 			if(strResult.equals(Result.TIE))
 			{
 				System.out.println();
-				System.out.println("PUSH, Player and Dealer got same points in "+strHand);
+				System.out.println("PUSH!! Player and Dealer get same points in "+strHand);
 				hitfirstResult=Result.TIE;
 			}
 			
